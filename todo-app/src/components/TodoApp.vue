@@ -1,57 +1,57 @@
 <template>
-  <div class="container margin-left:50px">
-    <h2 class="text-center mt-5">My ToDo App</h2>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">My To-Do App</h2>
 
-    <!--input-->
-    <div class="d-flex">
-      <input v-model="task" type="text" placeholder="Enter task" class="form-control">
-      <button @click="submitTask" class="btn btn-warning rounded-0">SUBMIT</button>
+    <!-- Input form -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="input-group">
+          <input v-model="task" type="text" placeholder="Enter task" class="form-control">
+          <div class="input-group-append">
+            <button @click="submitTask" class="btn btn-warning">Submit</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!--task table-->
-
-    <table class="table table-bordered mt-5">
+    <!-- Task table -->
+    <table class="table table-striped table-hover">
       <thead>
       <tr>
         <th scope="col">Task</th>
-        <th scope="col">status</th>
+        <th scope="col">Status</th>
         <th scope="col" class="text-center">Edit</th>
         <th scope="col" class="text-center">Delete</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="(task, index) in tasks" :key="index">
-        <td><span :class="{'finished':task.status==='finished'}">
-          {{ task.name }}
-        </span>
+        <td>
+          <span :class="{'finished':task.status==='finished'}">{{ task.name }}</span>
         </td>
-        <td style="width:120px">
-          <span @click="changeStatus(index)"  class="pointer"
-          :class="{'text-danger':task.status==='To-Do',
+        <td>
+          <span @click="changeStatus(index)" class="pointer"
+                :class="{'text-danger':task.status==='To-Do',
                      'text-warning':task.status==='In-progress',
-                     'text-success':task.status==='Finished '}"
-          >
+                     'text-success':task.status==='Finished'}">
             {{ task.status }}
           </span>
         </td>
         <td>
           <div class="text-center" @click="editTask(index)">
-            <span class="fa fa-pen">
-            </span>
+            <i class="fas fa-pen"></i>
           </div>
         </td>
         <td>
           <div class="text-center" @click="deleteTask(index)">
-            <span class="fa fa-trash"></span>
+            <i class="fas fa-trash"></i>
           </div>
         </td>
       </tr>
-
       </tbody>
     </table>
-
-
   </div>
+
 </template>
 
 <script>
